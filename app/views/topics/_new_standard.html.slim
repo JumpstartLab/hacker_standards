@@ -1,0 +1,7 @@
+h3 Create a New Standard
+
+= semantic_form_for topic.standards.new do |f|
+  = f.input :title
+  = f.input :details
+  = f.input :parent_id, :as => :hidden
+  = f.submit :id => 'standard_submit'

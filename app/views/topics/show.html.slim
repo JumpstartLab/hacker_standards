@@ -1,1 +1,7 @@
 h1#title = topic.title
+
+div#new_standard
+  == render :partial => 'new_standard'
+
+div#standards
+  == render :partial => 'standard', :collection => topic.standards

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221142504) do
+ActiveRecord::Schema.define(:version => 20120221200516) do
+
+  create_table "standards", :force => true do |t|
+    t.string   "title"
+    t.text     "details"
+    t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "topics", :force => true do |t|
     t.string   "title"

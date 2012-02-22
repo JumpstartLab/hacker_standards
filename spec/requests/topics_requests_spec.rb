@@ -2,12 +2,39 @@ require 'spec_helper'
 
 describe "topics requests" do
   let(:topic){ Fabricate(:topic, :published => true) }
+  let(:topic_with_standards){ Fabricate(:topic_with_standards) }
 
   context "GET show" do
-    before(:each){ visit topic_path(topic) }
-
     it "displays the topic" do
+      visit topic_path(topic)
       page.should have_content(topic.title)
+    end
+
+    it "displays the child standards" do
+      visit topic_path(topic_with_standards)
+      within('#standards') do
+        topic_with_standards.standards.each do |standard|
+          page.should have_link(standard.title, :href => standard_path(standard))
+        end
+      end
+    end
+
+    it "has the form to create additional standards" do
+      visit topic_path(topic)
+      within('#new_standard') do
+        page.should have_field('standard_title')
+        page.should have_field('standard_details')
+        page.should have_button('standard_submit')
+      end
+    end
+
+    it "triggers the standards#create method" do
+      pending "Can't get this to work without complaining about a missing create template"
+      visit topic_path(topic)
+      fill_in('standard_title', :with => "helllo, world")
+      fill_in('standard_details', :with => "these are the details")
+      StandardsController.any_instance.should_receive(:create)
+      click_button('standard_submit')
     end
   end
 
