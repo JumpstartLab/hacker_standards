@@ -1,7 +1,6 @@
 h1 Create a New Topic
 
-= form_for topic do |f|
-  = f.label :title
-  = f.text_field :title
-
-  = f.submit :id => "topic_submit"
+= semantic_form_for topic do |f|
+  = f.inputs do
+    = f.input :title
+  = f.buttons

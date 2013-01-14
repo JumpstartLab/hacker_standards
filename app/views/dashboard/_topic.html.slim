@@ -1,2 +1,7 @@
-li
-  = topic.link
+div.topic.row
+  .span4
+    = topic.link
+  .span5.well
+    ul
+      li = topic.details
+      li = "#{topic.standards.count} Standards"

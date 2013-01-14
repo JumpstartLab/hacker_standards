@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe StandardsController do
-  context "POST create" do
-    before(:all) { @valid_attributes = HashWithIndifferentAccess.new(Fabricate(:standard, :parent_id => 1).attributes) }
+  context "#create" do
+    before(:all) { @valid_attributes = HashWithIndifferentAccess.new(Fabricate(:standard).attributes) }
     let!(:valid_attributes){ @valid_attributes }
     let!(:invalid_attributes){ valid_attributes.merge({ :title => nil }) }
 

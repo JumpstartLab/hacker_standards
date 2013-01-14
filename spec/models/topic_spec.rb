@@ -5,8 +5,9 @@ describe Topic do
   let!(:unpublished){ Fabricate(:topic, :published => false ) }
 
   context "attributes" do
-    it { should respond_to(:title) }
-    it { should respond_to(:published) }
+    [:title, :published, :details].each do |attr|
+      it { should respond_to(attr) }
+    end
 
     it "is not valid without a title" do
       baddie = published.clone

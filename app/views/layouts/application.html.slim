@@ -29,27 +29,24 @@ html lang="en"
             span.i-bar
             span.i-bar
             span.i-bar
-          a.brand href="#"Standards
+          a.brand href="/" Hacker Standards
           .container.nav-collapse
             ul.nav
               li= link_to "Topics", topics_path
               li= link_to "Standards", standards_path
 
     .container
-
       .content
         .row
-          .span9
+          #flash.span12
+            - flash.each do |key, message|
+              div{class="alert-message #{flash_name_to_bootstrap(key)}"}
+                p = message
+        .row
+          .span1
+          .span10
             = yield
-          .span1 &nbsp;
-          .span3
-            .well.sidebar-nav
-              h3 Sidebar
-              ul.nav.nav-list
-                li.nav-header Sidebar
-                li= link_to "Link 1", "/path1"
-                li= link_to "Link 2", "/path2"
-                li= link_to "Link 3", "/path3"
+          .span1
     
       footer
         p Hacker Standards by Jumpstart Lab

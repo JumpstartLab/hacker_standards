@@ -1,0 +1,10 @@
+h2#title = standard.title
+
+p#details = standard.details
+
+p.action.btn-group
+  = standard.edit_link
+  = standard.delete_link
+
+div#children 
+  == render :partial => 'child_standard', :collection => standard.children

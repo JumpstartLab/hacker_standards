@@ -1,10 +1,24 @@
 require 'spec_helper'
 
 describe "topics requests" do
-  let(:topic){ Fabricate(:topic, :published => true) }
+  let(:topic){ Fabricate(:topic) }
   let(:topic_with_standards){ Fabricate(:topic_with_standards) }
 
-  context "GET show" do
+  context '#index' do
+    let!(:topics){ [0...3].collect{ Fabricate(:topic) } }
+
+    before(:each){ visit topics_path }
+
+    it "displays active topics" do      
+      within('#topics') do
+        topics.each do |t|
+          page.should have_link(t.title, :href => topic_path(t))
+        end
+      end
+    end
+  end
+
+  context "#show" do
     it "displays the topic" do
       visit topic_path(topic)
       page.should have_content(topic.title)
@@ -24,7 +38,7 @@ describe "topics requests" do
       within('#new_standard') do
         page.should have_field('standard_title')
         page.should have_field('standard_details')
-        page.should have_button('standard_submit')
+        page.should have_button('Create Standard')
       end
     end
 
@@ -51,7 +65,7 @@ describe "topics requests" do
 
         before(:each) do
           fill_in('topic_title', :with => title )
-          click_button('topic_submit')         
+          click_button('Create Topic')         
         end
 
         it "displays the created topic's show page" do
@@ -63,7 +77,7 @@ describe "topics requests" do
 
       context "with invalid attributes" do
         before(:each) do
-          click_button('topic_submit')         
+          click_button('Create Topic')         
         end
 
         it "returns to the form" do

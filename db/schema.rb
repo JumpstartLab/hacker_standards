@@ -11,21 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221200516) do
+ActiveRecord::Schema.define(:version => 20120222204635) do
 
   create_table "standards", :force => true do |t|
     t.string   "title"
     t.text     "details"
     t.integer  "parent_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "deleted",        :default => false
+    t.string   "parent_type"
+    t.integer  "children_count", :default => 0
   end
+
+  add_index "standards", ["deleted"], :name => "index_standards_on_deleted"
 
   create_table "topics", :force => true do |t|
     t.string   "title"
-    t.boolean  "published",  :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.boolean  "published",       :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.text     "details"
+    t.integer  "standards_count", :default => 0
   end
 
 end

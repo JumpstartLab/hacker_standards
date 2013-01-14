@@ -1,7 +1,14 @@
-h3 Create a New Standard
+.row
+  div.span3
+    h3 Create a New Standard
+    p  Add a new child standard attached to the current element.
 
-= semantic_form_for topic.standards.new do |f|
-  = f.input :title
-  = f.input :details
-  = f.input :parent_id, :as => :hidden
-  = f.submit :id => 'standard_submit'
+  div.span6.well
+    = semantic_form_for topic.standards.new do |f|
+      = f.semantic_errors
+      = f.inputs do
+        = f.input :title
+        = f.input :details, :height => 3, :width => 80
+        = f.input :parent_id, :as => :hidden
+        = f.input :parent_type, :as => :hidden
+      = f.buttons

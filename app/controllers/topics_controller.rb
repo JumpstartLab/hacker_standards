@@ -3,6 +3,10 @@ class TopicsController < ApplicationController
     params[:id] ? TopicDecorator.find(params[:id]) : Topic.new
   end
 
+  assume(:topics) do
+    TopicDecorator.decorate(Topic.available)
+  end
+
   def show
   end
 
@@ -18,4 +22,6 @@ class TopicsController < ApplicationController
     end
   end
 
+  def index
+  end
 end

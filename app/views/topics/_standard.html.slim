@@ -1,2 +1,4 @@
 - unless standard.new_record?
-  li = link_to standard.title, standard_path(standard), :id => dom_id(standard)
+  .row
+    h4.span3 = link_to standard.title, standard_path(standard), :id => dom_id(standard)
+    p.span6 = standard.details
